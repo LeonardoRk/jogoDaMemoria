@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	<meta charset="utf-8">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<script type ="text/javascript" src ="js/main.js"></script>
@@ -12,26 +13,73 @@
 			Quantas linhas?
 		</h1>
 
-		<form>
-			<input type="text" id="numeroCartas" name="lname">
-			<input type="submit" id="enterButton" value="Enter">
-		</form>
+	
+		<input type="text" id="numeroCartas" name="lname">
+		<input type="submit" id="enterButton" value="Enter">
+	
 
 		<script>
 			var botao = document.getElementById("enterButton");
+			var tela = document.querySelector("canvas");
+			var pincel = tela.getContext("2d");
+			pincel.lineWidth = 10;
+
+			var width = tela.width;
+			var height = tela.height;
 			var numeroLinhas = undefined;
 			var numeroValido = false;
 
 			botao.onclick = anotaNumeroCartas;
 
-			function anotaNumeroCartas(){
+			function anotaNumeroCartas() {
+				limpaTela();
 				numeroLinhas = document.getElementById("numeroCartas").value;
-				if(numeroLinhas > 1){
+				if(numeroLinhas > 1 && numeroLinhas < 6){
 					numeroValido = true;
+					desenhaCampo();
 				}else{
-					alert("Numero Inválido, digite um número maior que 1");
+					alert("Numero Inválido, digite um número maior que 1 e menor que 6");
 				}
+			}
 
+			function limpaTela() {
+				pincel.fillStyle = '#ffffff';
+				pincel.fillRect(0,0,800,600);
+			}
+
+			function desenhaCampo() {
+				if(numeroValido){
+					desenhaColunas();
+					desenhaLinhas();
+				}
+			}
+
+			function desenhaColunas() {
+				pincel.strokeStyle = '#cccccc';
+				var acumulateDPlaceToDraw = 0;
+				for(var i = 0 ; i < numeroLinhas - 1; i++){
+					
+					var placeToDraw = width/numeroLinhas;
+					var acumulateDPlaceToDraw = acumulateDPlaceToDraw + placeToDraw;
+					pincel.beginPath();
+					pincel.moveTo(acumulateDPlaceToDraw,0);
+					pincel.lineTo(acumulateDPlaceToDraw, height);
+					pincel.stroke();
+				}
+			}
+
+			function desenhaLinhas() {
+				pincel.strokeStyle = '#cccccc';
+				var acumulateDPlaceToDraw = 0;
+				for(var i = 0 ; i < numeroLinhas - 1; i++){
+					
+					var placeToDraw = height/numeroLinhas;
+					var acumulateDPlaceToDraw = acumulateDPlaceToDraw + placeToDraw;
+					pincel.beginPath();
+					pincel.moveTo(0, acumulateDPlaceToDraw);
+					pincel.lineTo(width, acumulateDPlaceToDraw);
+					pincel.stroke();
+				}
 			}
 		</script>
 
