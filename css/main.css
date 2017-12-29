@@ -1,0 +1,17 @@
+canvas {
+	border: 2px solid black;
+	display: block;
+}
+
+input {
+	display: inline-block;
+}
+
+h1 {
+	display: 	inline-block;
+	padding-right: 10px;
+}
+
+form {
+	display: inline-block;
+}

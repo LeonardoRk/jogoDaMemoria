@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type ="text/javascript" src ="js/main.js"></script>
+	</head>
+	<body>
+		<canvas 	width="800" height="550">
+		</canvas>
+
+		<h1>
+			Quantas linhas?
+		</h1>
+
+		<form>
+			<input type="text" id="numeroCartas" name="lname">
+			<input type="submit" id="enterButton" value="Enter">
+		</form>
+
+		<script>
+			var botao = document.getElementById("enterButton");
+			var numeroLinhas = undefined;
+			var numeroValido = false;
+
+			botao.onclick = anotaNumeroCartas;
+
+			function anotaNumeroCartas(){
+				numeroLinhas = document.getElementById("numeroCartas").value;
+				if(numeroLinhas > 1){
+					numeroValido = true;
+				}else{
+					alert("Numero Inválido, digite um número maior que 1");
+				}
+
+			}
+		</script>
+
+
+	</body>
+</html>
