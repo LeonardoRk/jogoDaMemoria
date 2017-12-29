@@ -6,7 +6,7 @@
 		<script type ="text/javascript" src ="js/main.js"></script>
 	</head>
 	<body>
-		<canvas 	width="800" height="550">
+		<canvas 	width="1200" height="550">
 		</canvas>
 
 		<h1>
@@ -37,14 +37,45 @@
 				if(numeroLinhas > 1 && numeroLinhas < 16){
 					numeroValido = true;
 					desenhaCampo();
+					desenhaFiguras();
 				}else{
 					alert("Numero Inválido, digite um número maior que 1 e menor que 16");
 				}
 			}
 
+			function desenhaFiguras(){
+				pincel.fillStyle = '#000000';
+
+				var inicioX = 2;
+				var inicioY = 2;
+				var telaEmX = width/numeroLinhas;
+				var telaEmY = height/numeroLinhas;
+				var inicioCirculo = 0
+
+				for(var coluna = 0 ; coluna < numeroLinhas ; coluna++) {
+					for(var linha = 0 ; linha < numeroLinhas ; linha++) {
+						pincel.fillRect(inicioX, inicioY, telaEmX - 4, telaEmY -4 );
+
+
+						pincel.beginPath();
+						pincel.arc((inicioX + telaEmX)/2 + inicioCirculo , (inicioY + telaEmY)/2, 25,0,2*Math.PI);
+						pincel.stroke();
+
+						inicioCirculo = inicioCirculo + telaEmX/2;
+						inicioX = inicioX + telaEmX ;
+
+					
+					}
+		
+					inicioX = 2;
+					inicioCirculo = 0;
+					inicioY = inicioY + telaEmY ;
+				}
+			}
+
 			function limpaTela() {
 				pincel.fillStyle = '#ffffff';
-				pincel.fillRect(0,0,800,600);
+				pincel.fillRect(0,0,width,height);
 			}
 
 			function desenhaCampo() {
