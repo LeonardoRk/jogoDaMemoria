@@ -34,11 +34,11 @@
 			function anotaNumeroCartas() {
 				limpaTela();
 				numeroLinhas = parseInt(document.getElementById("numeroCartas").value);
-				if(numeroLinhas > 1){
+				if(numeroLinhas > 1 && numeroLinhas < 16){
 					numeroValido = true;
 					desenhaCampo();
 				}else{
-					alert("Numero Inválido, digite um número maior que 1 e menor que 6");
+					alert("Numero Inválido, digite um número maior que 1 e menor que 16");
 				}
 			}
 
