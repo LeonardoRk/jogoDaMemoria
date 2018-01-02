@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type ="text/javascript" src ="js/main.js"></script>
+		<script type ="text/javascript" src ="js/services.js"></script>
+		<script type ="text/javascript" src ="js/campo.js"></script>
+		<script type ="text/javascript" src ="js/cartas.js"></script>
+	</head>
+	<body>
+
+		<canvas 	width="1200" height="550">
+		</canvas>
+
+		<script>
+
+			var parametros = window.location.search.substr(1);
+			var numeroLinhas = getParameter("name", parametros);
+	
+			var tela = document.querySelector("canvas");
+			var pincel = tela.getContext("2d");
+			pincel.lineWidth = 2;
+
+			var width = tela.width;
+			var height = tela.height;
+			var tamanhoCartaX = width / numeroLinhas;
+			var tamanhoCartaY = height / numeroLinhas;
+
+			var imgSizeX = undefined;
+			var imgSizeY = undefined;
+
+			var mapeamentoDaPosicaoDasCartas = new Map();
+
+			desenhaCampo();
+
+			function desenhaCampo() {
+
+				mapeamentoDaPosicaoDasCartas = mapeiaPosicaoDasCartas(tamanhoCartaX, tamanhoCartaY);
+			
+				desenhaColunas();
+				desenhaLinhas();
+
+				var cartas = new Array();
+				cartas = criaCartas(tamanhoCartaX, tamanhoCartaY);
+				
+				desenhaFiguras(cartas, mapeamentoDaPosicaoDasCartas);
+			}
+
+		
+		</script>
+
+	</body>
+</html>

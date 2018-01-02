@@ -1,0 +1,30 @@
+<button id='criarLinha' onclick="chamar()">Criar uma nova linha</button>
+ 
+<div class="Linha" id="linha" style="width:600px;">
+<!-- RECEBE DIVS DINAMICAS -->
+</div>
+
+
+<script type="text/javascript">
+
+var id=1;
+ 
+function chamar(){
+	alert("entrou");
+	var divFilha = document.createElement("div");
+	divFilha.id = "filha"+id;
+	
+	divFilha.innerHTML = "Conteúdo de texto";
+	divFilha.padding = "40px";
+	divFilha.margin="30px 30px";
+
+	var divPai = document.getElementById("linha");
+
+  divPai.appendChild(divFilha);
+  id++;
+ 
+}
+
+
+ 
+</script>
