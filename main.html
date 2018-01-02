@@ -3,117 +3,53 @@
 	<meta charset="utf-8">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script type ="text/javascript" src ="js/main.js"></script>
+		
 	</head>
 	<body>
-		<canvas 	width="1200" height="550">
-		</canvas>
 
 		<h1>
 			Quantas linhas?
 		</h1>
 
-	
-		<input type="text" id="numeroCartas" name="lname">
-		<input type="submit" id="enterButton" value="Enter">
-	
+		<form action="jogo.html" onsubmit="return validate()" method="GET">
+			<select id="dropdown">
+			  <option value="12">Fácil (12 pares)</option>
+			  <option value="20">Médio (20 pares)</option>
+			  <option value="30">Difícil (30 pares)</option>
+			  <option value="42">Fodão (42 pares)</option>
+			</select>
+			<input type="hidden" id="qtdPecas" name="qtdPecas" value="">
+			<input type="submit" value="OK">
+		</form>
 
 		<script>
-			var botao = document.getElementById("enterButton");
-			var tela = document.querySelector("canvas");
-			var pincel = tela.getContext("2d");
-			pincel.lineWidth = 2;
 
-			var width = tela.width;
-			var height = tela.height;
-			var numeroLinhas = undefined;
-			var numeroValido = false;
+			document.keypress(function(event){
 
-			botao.onclick = anotaNumeroCartas;
-
-			function anotaNumeroCartas() {
-				limpaTela();
-				numeroLinhas = parseInt(document.getElementById("numeroCartas").value);
-				if(numeroLinhas > 1 && numeroLinhas < 16){
-					numeroValido = true;
-					desenhaCampo();
-					desenhaFiguras();
-				}else{
-					alert("Numero Inválido, digite um número maior que 1 e menor que 16");
+				if(event.keyCode == 13){
+					$("#Enter").click();
 				}
+
+			});
+
+			function dosomething(){
+    		alert('..');
+    		//activate some code depends on the link.
+			}
+			
+			var qtdPecas = undefined;
+
+			function validate(){
+				qtdPecas = parseInt(document.getElementById("dropdown").value);
+				document.getElementById("qtdPecas").value = qtdPecas;
+				return true;
 			}
 
-			function desenhaFiguras(){
-				pincel.fillStyle = '#000000';
-
-				var inicioX = 2;
-				var inicioY = 2;
-				var telaEmX = width/numeroLinhas;
-				var telaEmY = height/numeroLinhas;
-				var inicioCirculo = 0
-
-				for(var coluna = 0 ; coluna < numeroLinhas ; coluna++) {
-					for(var linha = 0 ; linha < numeroLinhas ; linha++) {
-						pincel.fillRect(inicioX, inicioY, telaEmX - 4, telaEmY -4 );
-
-
-						pincel.beginPath();
-						pincel.arc((inicioX + telaEmX)/2 + inicioCirculo , (inicioY + telaEmY)/2, 25,0,2*Math.PI);
-						pincel.stroke();
-
-						inicioCirculo = inicioCirculo + telaEmX/2;
-						inicioX = inicioX + telaEmX ;
-
-					
-					}
-		
-					inicioX = 2;
-					inicioCirculo = 0;
-					inicioY = inicioY + telaEmY ;
-				}
-			}
-
-			function limpaTela() {
-				pincel.fillStyle = '#ffffff';
-				pincel.fillRect(0,0,width,height);
-			}
-
-			function desenhaCampo() {
-				if(numeroValido){
-					desenhaColunas();
-					desenhaLinhas();
-				}
-			}
-
-			function desenhaColunas() {
-				pincel.strokeStyle = '#cccccc';
-				var acumulateDPlaceToDraw = 0;
-				for(var i = 0 ; i < numeroLinhas - 1; i++){
-					
-					var placeToDraw = width/numeroLinhas;
-					var acumulateDPlaceToDraw = acumulateDPlaceToDraw + placeToDraw;
-					pincel.beginPath();
-					pincel.moveTo(acumulateDPlaceToDraw,0);
-					pincel.lineTo(acumulateDPlaceToDraw, height);
-					pincel.stroke();
-				}
-			}
-
-			function desenhaLinhas() {
-				pincel.strokeStyle = '#cccccc';
-				var acumulateDPlaceToDraw = 0;
-				for(var i = 0 ; i < numeroLinhas - 1; i++){
-					
-					var placeToDraw = height/numeroLinhas;
-					var acumulateDPlaceToDraw = acumulateDPlaceToDraw + placeToDraw;
-					pincel.beginPath();
-					pincel.moveTo(0, acumulateDPlaceToDraw);
-					pincel.lineTo(width, acumulateDPlaceToDraw);
-					pincel.stroke();
-				}
-			}
+			
 		</script>
-
 
 	</body>
 </html>
+
+
+				

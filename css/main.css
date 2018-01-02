@@ -3,11 +3,6 @@ canvas {
 	display: block;
 }
 
-input {
-	display: inline-block;
-}
-
 h1 {
-	display: 	inline-block;
 	padding-right: 10px;
 }
