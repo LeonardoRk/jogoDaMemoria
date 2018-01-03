@@ -1,0 +1,21 @@
+.container {
+	width: 790px;
+	height: 340px;
+	border: 2px solid black;
+	margin: 130px auto;
+	padding: 2px;
+	box-sizing: content-box;
+}
+
+.filha {
+	display: inline-block;
+	box-sizing: border-box;
+	border: 1px solid black;
+	padding: 2px;
+	margin-bottom: 3px;
+}
+
+img {
+	box-sizing: border-box;
+	padding: 3px;
+}

@@ -2,7 +2,6 @@
 <html>
 	<meta charset="utf-8">
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
 		
 	</head>
 	<body>
@@ -11,37 +10,25 @@
 			Quantas linhas?
 		</h1>
 
-		<form action="jogo.html" onsubmit="return validate()" method="GET">
+	
+		<form action="jogo.html" onsubmit="return passDropdownValueToHiddenInput()" method="GET">
 			<select id="dropdown">
-			  <option value="12">Fácil (12 pares)</option>
-			  <option value="20">Médio (20 pares)</option>
-			  <option value="30">Difícil (30 pares)</option>
-			  <option value="42">Fodão (42 pares)</option>
+			  <option value="6">Fácil (6 pares)</option>
+			  <option value="10">Médio (10 pares)</option>
+			  <option value="15">Difícil (15 pares)</option>
+			  <!--<option value="21">Fodão (21 pares)</option>-->
 			</select>
-			<input type="hidden" id="qtdPecas" name="qtdPecas" value="">
+			<input type="hidden" id="numeroPares" name="numeroPares" value="">
 			<input type="submit" value="OK">
 		</form>
 
 		<script>
 
-			document.keypress(function(event){
-
-				if(event.keyCode == 13){
-					$("#Enter").click();
-				}
-
-			});
-
-			function dosomething(){
-    		alert('..');
-    		//activate some code depends on the link.
-			}
-			
 			var qtdPecas = undefined;
 
-			function validate(){
+			function passDropdownValueToHiddenInput(){
 				qtdPecas = parseInt(document.getElementById("dropdown").value);
-				document.getElementById("qtdPecas").value = qtdPecas;
+				document.getElementById("numeroPares").value = qtdPecas;
 				return true;
 			}
 

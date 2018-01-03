@@ -2,52 +2,88 @@
 <html>
 	<meta charset="utf-8">
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-		<script type ="text/javascript" src ="js/main.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/jogo.css">
 		<script type ="text/javascript" src ="js/services.js"></script>
 		<script type ="text/javascript" src ="js/campo.js"></script>
-		<script type ="text/javascript" src ="js/cartas.js"></script>
+		<script type ="text/javascript" src ="js/carta.js"></script>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	</head>
 	<body>
 
-		<canvas 	width="1200" height="550">
-		</canvas>
 
+		<div class="container">
+				
+		</div>
+
+	
 		<script>
 
 			var parametros = window.location.search.substr(1);
-			var numeroLinhas = getParameter("name", parametros);
-	
-			var tela = document.querySelector("canvas");
-			var pincel = tela.getContext("2d");
-			pincel.lineWidth = 2;
+			var NOME_PARAMETRO_PASSADO = "numeroPares";
+			var numeroPares = getParameter(NOME_PARAMETRO_PASSADO, parametros);
+			console.log("numero de pares: " + numeroPares);
 
-			var width = tela.width;
-			var height = tela.height;
-			var tamanhoCartaX = width / numeroLinhas;
-			var tamanhoCartaY = height / numeroLinhas;
 
-			var imgSizeX = undefined;
-			var imgSizeY = undefined;
+			var containerClass = undefined;
+			containerClass = $( ".container" );
+			var width = containerClass.css("width");
+			var height = containerClass.css("height");
+			console.log("Tamanho do campo de jogo: " + width + " , " + height);
 
-			var mapeamentoDaPosicaoDasCartas = new Map();
+			if(numeroPares == 6){
+				var tamanhoCartaX = parseFloat(width) / 4;
+				var tamanhoCartaY = parseFloat(height) / 3;
+				console.log("tamanho de cada carta: " + tamanhoCartaX + " , " + tamanhoCartaY);
 
-			desenhaCampo();
-
-			function desenhaCampo() {
-
-				mapeamentoDaPosicaoDasCartas = mapeiaPosicaoDasCartas(tamanhoCartaX, tamanhoCartaY);
-			
-				desenhaColunas();
-				desenhaLinhas();
-
-				var cartas = new Array();
-				cartas = criaCartas(tamanhoCartaX, tamanhoCartaY);
 				
-				desenhaFiguras(cartas, mapeamentoDaPosicaoDasCartas);
+				criaDivs(tamanhoCartaX, tamanhoCartaY);
+
+				var cartas = undefined;
+				cartas = criaCartas(tamanhoCartaX, tamanhoCartaY, numeroPares);
+				cartas = shuffle(cartas);
+
+				criaCartaNasDivs();
+
+			
+								
 			}
 
-		
+			
+			function criaDivs(tamanhoCartaX, tamanhoCartaY){
+				var id=	1;
+				for(var i = 0 ; i < numeroPares * 2; i++){
+
+					var divFilha = document.createElement("div");
+					divFilha.id = "filha"+id;
+					divFilha.setAttribute('class' ,'filha');
+				  divFilha.style.width = tamanhoCartaX + "px";
+				  divFilha.style.height = tamanhoCartaY + "px";
+
+					console.log("O id das filhas: " + divFilha.id);
+
+				  containerClass.append(divFilha);
+				  id++;
+				}
+			}
+
+
+			function criaCartaNasDivs(){
+				var id = 1;
+				for(var i = 0 ; i < numeroPares * 2; i++){
+
+					var divFilha = $('#filha' + id);
+
+					var img = document.createElement("img");
+					img.id = "img" + id;
+					img.width = tamanhoCartaX;
+					img.height = tamanhoCartaY;
+					img.src = cartas[i].frente.src;
+
+					divFilha.append(img);
+	 				id++;
+				}
+			}
+
 		</script>
 
 	</body>

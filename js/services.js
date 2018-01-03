@@ -16,31 +16,6 @@ function getParameter(paramName, parametros) {
   return null;
 }
 
-function desenhaFiguras(cartas, posicoesCartas){
-	pincel.fillStyle = '#000000';
-
-
-	cartas = shuffle(cartas);
-	var posicaoDaImagem = undefined, posicaoDaCopia = undefined;
-
-	console.log("quantidade de cartas: " + cartas.length);
-	var img = undefined;
-
-	for(var i = 0 ; i < cartas.length; i++){
-		img = cartas[i].fundo;
-		img.onload = function(img) {
-			return function(){
-				posicaoDaImagem = encontraUmaPosicaoAleatoria(posicoesCartas);
-				pincel.drawImage(img, posicaoDaImagem[0], posicaoDaImagem[1], img.width -4, img.height -4);
-
-				posicaoDaCopia = encontraUmaPosicaoAleatoria(posicoesCartas);
-				pincel.drawImage(img, posicaoDaCopia[0], posicaoDaCopia[1], img.width -4, img.height -4);
-				
-			};
-		}(img);
-	}
-
-}
 
 function encontraUmaPosicaoAleatoria(posicoesCartas){
 
@@ -65,5 +40,6 @@ function shuffle(a) {
       a[i] = a[j];
       a[j] = x;
   }
+  console.log("Array Embaralhado");
   return a;
 }

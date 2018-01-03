@@ -7,18 +7,12 @@
 
 <script type="text/javascript">
 
-var id=1;
  
+var id=1;
 function chamar(){
-	alert("entrou");
+	alert("entrou no criaDiv");
 	var divFilha = document.createElement("div");
 	divFilha.id = "filha"+id;
-	
-	divFilha.innerHTML = "Conteúdo de texto";
-	divFilha.padding = "40px";
-	divFilha.margin="30px 30px";
-
-	var divPai = document.getElementById("linha");
 
   divPai.appendChild(divFilha);
   id++;
